@@ -6,3 +6,6 @@ setInterval(() => {
     current = (current + 1)% images.length;
     images[current].classList.add('active');
 }, 9000);
+
+
+
