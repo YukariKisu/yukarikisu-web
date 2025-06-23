@@ -1,0 +1,68 @@
+/* ===== Reset & Base Setup ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e1e1e1;        /* トップページと統一 */
+  color: #333;                      /* 黒より馴染むグレー */
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+
+/* ===== Content Container ===== */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center; /* 中央揃え（お好みで） */
+  align-items: center;
+  gap: 50px;/*ボタン同士の間隔 */
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.nav-buttons li img {
+  height: auto;
+}
+
+.nav-buttons li:nth-child(3) img {
+  margin-top:5px;
+}
+
+
+/* ===== Responsive (Mobile first) ===== */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .container {
+    padding: 1.2rem;
+  }
+
+  .background-gradient {
+    background: linear-gradient(
+      to right,
+      #e1e1e1 0%,
+      #e1e1e1 5%,
+      #eaeaea 40%,
+      #eaeaea 60%,
+      #e1e1e1 95%,
+      #e1e1e1 100%
+    );
+  }
+}
