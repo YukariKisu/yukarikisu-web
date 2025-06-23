@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: #e1e1e1;        /* トップページと統一 */
-  color: #333;                      /* 黒より馴染むグレー */
+  background-color: #e1e1e1;     
+  color: #333;                      
   font-family: 'Nunito', sans-serif;
   position: relative;
   min-height: 100vh;
@@ -26,9 +26,9 @@ body {
 
 .nav-buttons {
   display: flex;
-  justify-content: center; /* 中央揃え（お好みで） */
+  justify-content: center; 
   align-items: center;
-  gap: 50px;/*ボタン同士の間隔 */
+  gap: 50px;
   list-style: none;
   padding: 0;
   margin: 20px 0;
@@ -41,6 +41,7 @@ body {
 .nav-buttons li:nth-child(3) img {
   margin-top:5px;
 }
+
 
 
 /* ===== Responsive (Mobile first) ===== */
@@ -65,4 +66,22 @@ body {
       #e1e1e1 100%
     );
   }
+
+  .nav-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 40px; /* 縦横の間隔 */
+  }
+
+  .nav-buttons li {
+    width: 45%;
+
+    text-align: center;
+  }
+
+  /* Concept以降を下段に送る */
+  .nav-buttons li:nth-child(n+3) {
+    order: 2;
+  }
+
 }
