@@ -8,10 +8,22 @@
 body {
   background-color: #e1e1e1;     
   color: #333;                      
-  font-family: 'Nunito', sans-serif;
   position: relative;
+  font-family: "Manrope", sans-serif;
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: 2.0;
+  font-size:larger;
+
+}
+
+.expression-img{
+  text-align: left;
+  margin: 2rem auto;
+  margin-bottom: 0;
+}
+
+.spacer{
+  height:2rem;
 }
 
 
@@ -36,6 +48,12 @@ body {
 
 .nav-buttons li img {
   height: auto;
+}
+
+.nav-buttons li img:hover{
+  opacity:0.7;
+  transform: scale(1.03);
+  transition: all 0.2s ease;
 }
 
 .nav-buttons li:nth-child(3) img {
@@ -116,5 +134,21 @@ body {
   .mobile-nav.show {
     display: flex;
   }
+
+  .expression-img {
+  display: 90%;
+  max-width: 90%;
+  height: auto;
+  margin: 20px auto 0 auto;
+  margin-bottom:0;
+}
+
+.expression-img img{
+  max-width: 90%;
+  height: auto;
+  display: inline-block;
+}
+
+
 
 }
