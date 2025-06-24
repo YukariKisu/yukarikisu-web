@@ -16,7 +16,22 @@ body {
 
 }
 
+.text-container {
+  padding: 6rem 1rem 10rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  font-family: "Manrope", sans-serif;
+  background: transparent;
+  letter-spacing: 0.03em;
+}
+
+
+
 .expression-img{
+  margin-top:0.1rem;
   text-align: left;
   margin: 2rem auto;
   margin-bottom: 0;
@@ -24,6 +39,17 @@ body {
 
 .spacer{
   height:2rem;
+}
+
+.credit {
+  position: static;        /* これが最重要 */
+  font-size: 0.7em;
+  color: #333;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 3rem;
+  width: 100%;
+
 }
 
 
@@ -75,6 +101,7 @@ body {
     display: none !important;
   }
 }
+
 
 
 
@@ -149,6 +176,14 @@ body {
   display: inline-block;
 }
 
+   .text-container {
+    padding: 2rem 1rem 6rem;  /* ← モバイルで適切な余白に調整 */
+    margin: 0 auto;
+    max-width: 90%;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
 
 
 }
