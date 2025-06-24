@@ -64,7 +64,7 @@ body {
   background-color: #e1e1e1;
   filter: brightness(1.015);
 
-  -webkit-mask-image: linear-gradient(
+    -webkit-mask-image: linear-gradient(
     to right,
     rgba(222, 222, 222, 0) 0%,
     black 30%,
@@ -78,6 +78,8 @@ body {
     black 70%,
     rgba(222, 222, 222, 0) 100%
   );
+
+
 }
 
 .bg-img.active {
