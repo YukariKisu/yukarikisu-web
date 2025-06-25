@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yukari Kisu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.google.com/noto/specimen/Noto+Sans+JP?lang=ja_Jpan" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,9 +23,10 @@
   <section class="content">
     <img src="img/YukariKisu.png" alt="Yukari Kisu" class="title-logo">
     <div class="language-buttons slide-up">
-    <button onclick="location.href='en/index.html'">English</button>
-    <button onclick="location.href='ja/index.html'">日本語</button>
+    <button onclick="setLanguageAndGo('en')">English</button>
+    <button onclick="setLanguageAndGo('ja')">日本語</button>
     </div>
+
 
   </section>
 </main>
@@ -35,6 +38,12 @@
   </div>
 </footer>
   <script src="js/main.js"></script>
+  <script>
+  function setLanguageAndGo(lang) {
+    localStorage.setItem("lang", lang);
+    location.href = `/${lang}/index.html`;
+  }
+</script>
 </body>
 </html>
 
