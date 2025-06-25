@@ -19,6 +19,12 @@ main{
   padding-bottom:10rem;
 }
 
+.philosophy-title {
+  font-size: 2rem; 
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+}
+
 
 /* Background container */
 .background {
@@ -228,6 +234,10 @@ main{
   z-index: 2;
   color: #333;
 }
+
+  .philosophy-title {
+    font-size: 1.5rem;
+  }
 
 
   .section-buttons {
