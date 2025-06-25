@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <li><a href="${base}/aboutme.html"><img src="/common/img/nav-about.png" alt="About"></a></li>
           <li><a href="${base}/concept.html"><img src="/common/img/nav-concept.png" alt="Concept"></a></li>
           <li><a href="${base}/works.html"><img src="/common/img/nav-projects.png" alt="Projects"></a></li>
-          <li><a href="/technical-docs/index.html"><img src="/common/img/nav-techdocs.png" alt="Docs"></a></li>
+          <li><a href="/docs/works.html"><img src="/common/img/nav-techdocs.png" alt="Docs"></a></li>
         </ul>
       </nav>
 
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <a href="${base}/aboutme.html"><img src="/common/img/nav-about.png" alt="About"></a>
         <a href="${base}/concept.html"><img src="/common/img/nav-concept.png" alt="Concept"></a>
         <a href="${base}/works.html"><img src="/common/img/nav-projects.png" alt="Projects"></a>
-        <a href="/technical-docs/index.html"><img src="/common/img/nav-techdocs.png" alt="Docs"></a>
+        <a href="/docs/works.html"><img src="/common/img/nav-techdocs.png" alt="Docs"></a>
       </div>
     </header>
   `;
