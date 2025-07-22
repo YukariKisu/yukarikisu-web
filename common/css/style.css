@@ -124,6 +124,18 @@ body {
   }
 }
 
+/* hooter setting */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  min-height: calc(100vh - 120px); 
+}
+
+
 /* ------ works navi botton ------- */
 
 .section-buttons-works {
