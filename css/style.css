@@ -135,30 +135,6 @@ body {
 }
 
 
-/* Social icons for PC */
-/*.social-icons {
-  margin-top: 1.5em;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}*/
-
-/*.social-icons img {
-  width: 30px;
-  height: 30px;
-  filter: invert(100%);
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-}*/
-
-/*.social-icons img:hover {
-  opacity: 1;
-}*/
-
-/* Social icons for mobile */
-/*.social-icons-mobile {
-  display: none;
-}*/
 
 /* Credit (footer) */
 .credit {

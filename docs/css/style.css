@@ -232,13 +232,6 @@ main{
     mask-image: none;
   }
 
-  /*.content {
-    top: 52%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0 1rem;
-    text-align: center;
-  }*/
 
   .content {
   padding: 0 1rem;
