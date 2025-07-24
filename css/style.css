@@ -220,21 +220,6 @@ body {
     display: none;
   }
 
-  /*.social-icons-mobile {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  position: absolute;
-  bottom: 3.5rem; 
-  width: 100%;
-}
-
-  .social-icons-mobile img {
-    width: 24px;
-    height: 24px;
-    filter: invert(100%);
-    opacity: 0.8;
-  }*/
 
   .credit {
   bottom: 0.5rem;
