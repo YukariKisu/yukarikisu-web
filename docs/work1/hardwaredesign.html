@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <!-- common CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../common/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- common header -->
+  <div id="header"></div>
+
+  <!-- Main contents -->
+  <main class="text-container">
+    <section class="content about-content">
+      <div class="expression-img">
+      <img src="../img/HardwareDesign.svg" alt="Hardware Design">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+  <!-- Overview -->
+      <h2>Overview</h2>
+      <div class="expression-img">
+        <img src="img/Hard-Overview.jpg" alt="Hardware Design Overview">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+  <!-- Earring Unit -->
+      <h2>Earring Unit</h2>
+      <div class="spacer"></div>
+
+      <h3>1.Circuit Overview</h3>
+      <div class="spacer-s"></div>
+      <p>1. The charging circuit</p>
+      <p>2. The main power circuit</p>
+      <p>3. The main circuit</p>
+      <p>4. External Interface circuit</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      
+      <h3>2. Circuit Details</h3>
+      <div class="spacer"></div>
+  <!-- Earring --- The Charging Circuit -->
+      <h3>2.1 The Charging Circuit</h3>
+      <h3>2.1.1 Overview</h3>
+      <p>USB input - Charging IC (BQ24040) - Li-Pol Battery</p>
+      <div class="spacer"></div>
+
+      <h3>2.1.2 Main Functionality</h3>
+      <p>Charges a Li-Pol battery via the USB.</p>
+      <div class="spacer"></div>
+
+      <h3>2.1.3 Main Component</h3>
+      <p>Micro USB connector: 10118193-0001LF</p>
+      <p>Charging IC: BQ24040DSQR</p>
+      <p>Rechargeable battery: Li-Pol Battery</p>
+      <div class="spacer"></div>
+
+      <h3>2.1.4 Current Overflow</h3>
+      <div class="expression-img">
+      <img src="img/Hard-charging-current.jpg" alt="Current Overflow">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.1.5 Point & Details</h3>
+      <h3>[D1 Diode]</h3>
+      <p>D1 was added to prevent reverse current, over-voltage and electrostatic discharge (ESD).</p>
+      <div class="spacer-s"></div>
+      <h3>[ ISET ( Fast Charging current Setup ) ]</h3>
+      <p>RISET = K(ISET)/ I(OUT)</p>
+      <p>K(ISET) = 540 ohm(typical value)</p>
+      <p>I(OUT) = 0.5A max → RISET = 540A ohm / 0.5A = 1080ohm</p>
+      <div class="spacer-s"></div>
+      <h3>[PRETERM]</h3>
+      <p>PRETERM was set to 2kΩ, which is the typical value recommended in the datasheet.</p>
+      <div class="spacer-s"></div>
+      <h3>[ Charging LED ]</h3>
+      <p>The charging LED was implemented using open-drain output without extra circuit.</p>
+      <div class="spacer-s"></div>
+      <h3>[ Fully Charged LED]</h3>
+      <p>The fully charged LED was omitted. This is because it was necessary to eliminate components, which don’t affect the core functions, maintaining the essential functionalities, while meeting the PCB’s size and weight limitations.</p>
+      <div class="spacer-s"></div>
+      <h3>[ ISET2 ]</h3>
+      <p>It is possible to select the fast charging current: 100mA or 500mA. This is because this was the first implementation and it was better to change it depending on the situation.</p>
+      <div class="spacer-s"></div>
+      <h3>[ TS ]</h3>
+      <p>In this case, it could be considered that the charging circuit doesn’t have a significant heat production risks. This is because the charging speed is low(100mA), and the battery will supply power short time. In addition, the PCB space limitation needed to be considered. 
+        Therefore, the temperature sense circuit was omitted. However, the BTH pad was installed for the future extension.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.1.6 Creative Ingenuity</h3>
+      <h3>1.  Omission of components and circuits that don’t impair the basic functionalities</h3>
+      <p>Considering the PCB space and weight limitations, I decided to omit components and circuits that don’t affect the core functionalities keeping the essential functionalities. However I added a pad and a pin for the future extensions. </p>
+      <div class="spacer"></div>
+      <h3>2. Changing the charging IC from TP4056 to BQ204040</h3>
+      <p>BQ204040 is lighter and smaller than TP4056. I chose BQ204040 instead, considering the PCB’s space and weight limitations. In addition, it allows access to the nCHG pin for implementing BLE in the future.</p>
+      <div class="spacer"></div>
+      <h3>3. SolderJP_BRG installation</h3>
+      <p>In this case, the TS circuit was omitted, and the charging speed was set to 100mA to reduce the heat production risks. However I installed the SolderJP_BRG for the future extension.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.1.7 Schematic</h3>
+      <div class="expression-img">
+      <img src="img/Hard-charging-SCH.jpg" alt="Hard-Charging Schematic">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+  <!-- Earring --- The Main Power Circuit -->
+      <h3>2.2 The Main Power Circuit</h3>
+      <h3>2.2.1 Overview</h3>
+      <p>Li-Pol Battery - AP7333 - Main circuit</p>
+      <div class="spacer"></div>
+      <h3>2.2.2 Main Functionality</h3>
+      <p>Converts the input voltage from either a USB or a Li-pol battery to a stable 3.3V, which is suitable for the main circuit.</p>
+      <div class="spacer"></div>
+      <h3>2.2.3 Main Component</h3>
+      <p>Rechargeable Battery: Li-Pol Battery</p>
+      <p>Linear Regulator IC: AP7333-33SAG-7</p>
+      <div class="spacer"></div>
+      <h3>2.2.4 Current Overflow</h3>
+      <div class="expression-img">
+      <img src="img/Hard-mainpower-current.jpg" alt="Current Overflow">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.2.5 Point & Details</h3>
+      <h3>[ D2 ]</h3>
+      <p>D2 was added to prevent reverse current, over-voltage and electrostatic discharge (ESD).</p>
+      <div class="spacer-s"></div>
+      <h3>[ VIN ]</h3>
+      <p>(powered by the USB)  approximately 5V</p>
+      <p>(powered by the battery) approximately 3.7V</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.2.6 Creative Ingenuity</h3>
+      <h3>1. Selected AP7333 as a linear regulator IC</h3>
+      <p> The reason I selected this regulator IC is that it supports a wide range input voltage of 2.5V to 5.5V. This was important because the PCB is powered by both USB and  battery.  
+        Another reason is that this IC is compact and light. I chose it while considering the PCB’s space and weight limitations.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.2.7 Schematic</h3>
+      <div class="expression-img">
+      <img src="img/Hard-mainpower-SCH.jpg" alt="Hard-MainPower Schematic">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+  <!-- Earring --- The Main Circuit -->
+     <h3>2.3 The Main Circuit</h3>
+     <h3>2.3.1  Overview</h3>
+     <p>UART RXD input from the scarf’s ESP32 → NRF52832-QFAA-R → LED output</p>
+     <div class="spacer"></div>
+
+     <h3>2.3.2 Main Functionality</h3>
+     <p>Receives UART data from the scarf’s ESP32</p>
+     <p>Processes input data to control LED behavior</p>
+     <p>Controls GPIO</p>
+     <div class="spacer"></div>
+
+     <h3>2.3.3 Main Components</h3>
+     <p>Microcontroller: NRF52832-QFAA-R</p>
+     <p>LED: Kingbright AA3528SES</p>
+     <div class="spacer"></div>
+
+     <h3>2.3.4  Current Overflow</h3>
+     <div class="expression-img">
+     <img src="img/Hard-main-current.jpg" alt="Current Overflow">
+     </div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>2.3.5 Points & Details</h3>
+     <h3>[ GPIO assignment ]</h3>
+     <p>RXD: P0.08</p>
+     <p>LD1 : P0.24</p>
+     <p>nCHG: P0.01</p>
+     <p>All of them are general GPIO.</p>
+     <div class="spacer-s"></div>
+     <h3>[ SWD interface ]</h3>
+     <p>SWDCLK</p>
+     <p>SEDIO</p>
+     <p>3V3</p>
+     <p>GND</p>
+     <p>These pins are assigned on the header pin to program the microcontroller.</p>
+     <div class="spacer-s"></div>
+     <h3>[ LD1 ]</h3>
+     <p>( Register Calculation and Selection )</p>
+     <p>R = (3.3V - 2.2V) /0.02A = 55 Ω</p>
+     <p>Used:62Ω(standard value, readily available)</p>
+     <p>→LED current ≈18mA, acceptable</p>
+     <div class="spacer-s"></div>
+     <h3>[ RXD ]</h3>
+     <p>GPIO P0.08 is assigned RXD as the UART, and it receives the wind data from the scarf’s ESP32.</p>
+     <div class="spacer-s"></div>
+     <h3>[ nCHG ]</h3>
+     <p>A nCHG of the charging LED, which was omitted, was assigned on GPIO P0.01. </p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>2.3.6 Creative Ingenuity</h3>
+     <h3>1. nCHG Assignment </h3>
+     <p>The nCHG  pin used for charging LED, which was omitted, was assigned to GPIO P0.01. This is intended for future BLE implementation.</p>
+     <div class="spacer"></div>
+     <h3>2. Installation of Solder JP1 and JP2</h3>
+     <p>Solder JP1 and JP2 were installed to support future BLE features, including the use of an external clock circuit and an external antenna.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>2.3.7 Schematic</h3>
+     <div class="expression-img">
+     <img src="img/Hard-main-SCH.jpg" alt="Hard-Main Schematic">
+     </div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+
+  <!-- Earring --- External Interface -->
+     <h3>2.4 External Interface (SH connecter)</h3>
+     <h3>2.4.1 Overview</h3>
+     <p>UART RXD input from the scarf’s ESP32 ——>  SH female socket    ——- RXD /  GND /  nRST —— Main circuit</p>
+     <div class="spacer"></div>
+
+     <h3>2.4.2  Main Functionality</h3>
+     <p>Connects TXD from the scarf’s ESP32 physically.</p>
+     <p>Resets the program when something goes wrong.</p>
+     <div class="spacer"></div>
+
+     <h3>2.4.3  Main components</h3>
+     <p>SH female socket: BM03B-SRSS-TBT(LF)(SN)</p>
+     <div class="spacer"></div>
+
+     <h3>2.4.4 Current Overflow</h3>
+     <div class="spacer"></div>
+
+     <h3>2.4.5 Points & Details</h3>
+     <p>Connection between Main Circuit and External Interface</p>
+     <div class="expression-img">
+     <img src="img/Hard-external-current.jpg" alt="External Interface">
+     </div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>2.4.6 Creative Ingenuity</h3>
+     <h3>1. External Connection to nRST pin</h3>
+     <p>In this case, it is impossible to open and shut many times due to the case structure. Therefore, nRST pin is connected via the SH socket to reset the program when occurring the errors.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>2.4.7 Schematic</h3>
+     <div class="expression-img">
+     <img src="img/Hard-external-SCH.jpg" alt="Hard-External SCH">
+     </div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+  <!-- Earring --- PCB Layout -->
+     <h3>3. PCB Layout</h3>
+     <div class="spacer"></div>
+     <h3>3.1 Shape</h3>
+     <h3>3.1.1 Overview</h3>
+     <p>Circle (diameter approximately 24.5mm )</p>
+     <div class="spacer"></div>
+     <h3>3.1.2 Decision</h3>
+     <p>The earrings are shaped like a candle flame. This is because they are inspired by traditional Japanese candles, and a circular form was naturally required to express that imagery.</p>
+     <div class="spacer"></div>
+     <h3>3.1.3 Creative Ingenuity</h3>
+     <p>Circle shape makes the PCB space narrow. Components were selected carefully, considering their physical size and eliminate unnecessary ones while keeping the essential functionalities.</p>
+     <h3>Example:</h3>
+     <p>Omission of the fully charging LED, omission of the LS circuit. Changing the charging IC from TP4056 to BQ204040</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>3.2 Size & Weight</h3>
+     <h3>3.2.1 Overview</h3>
+     <p>The diameter : approximately 24.5mm</p>
+     <p>The thickness : 1mm</p>
+     <p>The PCB layer: 2 layer</p>
+     <p>The PCB weight: approximately 1.5g</p>
+     <div class="spacer"></div>
+
+     <h3>3.2.2 Decision</h3>
+     <p>To avoid the ear injury, the diameter was kept within 30mm and the total weight within 5g. The total weight was estimated to be approximately 3.5g. Therefore, the PCB thickness was set 1mm to maintain the PCB strength.</p>
+     <div class="spacer"></div>
+     <h3>3.3.3 Creative Ingenuity</h3>
+     <p>Even though the PCB is compact(diameter: 24.5mm), it needed to include many different components because it has several functionalities:  the charging circuit, UART communication and the use of the rechargeable battery. To solve this space limitation, the PCB was made into a two layer to lay out cables and a battery on the backside. In addition to selecting compact and minimum necessary components.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>3.3 Soldering & Assembling</h3>
+     <h3>3.3.1 Overview</h3>
+     <p>Most of components were assembled by JLCPCB.</p>
+     <p>The important parts needed to be soldered manually.</p>
+     <div class="spacer"></div>
+
+     <h3>3.3.2 Manually Soldered Parts</h3>
+     <p>Battery wires: B+, B-</p>
+     <p>UART, nRST:  RXD, GND, nRST</p>
+     <p>SWD interface: Header Pin (SWIDIO, SWDCLK, GND, VCC)</p>
+     <div class="spacer"></div>
+
+     <h3>3.3.3  Creative Ingenuity</h3>
+     <p>The soldering work was supported by a university professor because the PCB is small (24.5mm in diameter) and required high precision due to the limited space. I confirmed the soldering procedures, component layout, and positional alignment with the case in advance to ensure smooth assembly. The manual soldering was supported by Professor Petr Olivka from VSB – Technical University of Ostrava.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+<!-- Anemometer Unit -->
+     <h2>Anemometer Unit</h2>
+     <div class="spacer"></div>
+     <h3>1. Overview</h3>
+     <div class="expression-img">
+     <img src="img/Hard-Anemo-overview.jpg" alt="Anemometer Overview">
+     </div>
+     <div class="spacer"></div>
+
+     <h3>2. Main Functionality</h3>
+     <p>Sends data to the scarf’s ESP32 via UART</p>
+     <p>Detects wind via analog signal</p>
+     <p>Controls GPIO</p>
+     <div class="spacer"></div>
+
+     <h3>3. Main Component</h3>
+     <p>Anemometer Wind Speed Sensor</p>
+     <p>ESP32-DevKitC-32UE</p>
+     <div class="spacer"></div>
+
+     <h3>4. Current Overflow</h3>
+     <div class="expression-img">
+     <img src="img/Hard-anemo-current.jpg" alt="Current Overflow">
+     </div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>5. Points & Details</h3>
+     <h3>[ GPIO assignment ]</h3>
+     <h3>ADC Input : P0.34</h3>
+     <p>Assigned for analog signal from the anemometer.</p>
+     <p>Fixed mapping to ADC1_CHANNEL6</p>
+     <p>Input-only, not usable for digital output</p>
+     <div class="spacer-s"></div>
+     <h3>TXD : P0.21</h3>
+     <p>Assigned as UART output </p>
+     <p>General GPIO</p>
+     <div class="spacer"></div>
+
+     <h3>6. Creative Ingenuity</h3>
+     <h3>ESP32DevKitC-32UE</h3>
+     <p>I used the development board for the anemometer. This is because its functions are simpler and I focused on only the PCB design of the earrings for time and cost management.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+<!-- Scarf Unit -->
+     <h2>Scarf Unit</h2>
+     <div class="spacer"></div>
+     <h3>1. Overview</h3>
+     <div class="expression-img">
+     <img src="img/Hard-Scarf-overview.jpg" alt="Scarf Overview">
+     </div>
+     <div class="spacer"></div>
+
+     <h3>2. Main Functionality</h3>
+     <p>Receives UART data from the anemometer’s ESP32</p>
+     <p>Sends UART data to the earring’s nRF52832</p>
+     <p>Controls GPIO</p>
+     <p>Controls Servo to reflect wind</p>
+     <div class="spacer"></div>
+
+     <h3>3. Main Component</h3>
+     <p>ESP32-DevKitC-32UE</p>
+     <p>Waveshare MG90S Micro Servo (metal gear, 4.8-6V)</p>
+     <p>Mobile Battery</p>
+     <div class="spacer"></div>
+
+     <h3>4. Current Overflow</h3>
+     <div class="expression-img">
+     <img src="img/Hard-Scarf-current.jpg" alt="Current Overflow">
+     </div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>5. Points & Details</h3>
+     <h3>[ GPIO assignment ]</h3>
+     <h3>RXD Pin : P0.22</h3>
+     <p>Assigned as UART input from the anemometer</p>
+     <p>General GPIO</p>
+     <h3>TXD Pin : P0.17</h3>
+     <p>Assigned as UART output to the earring</p>
+     <p>General GPIO</p>
+     <div class="spacer-s"></div>
+     <h3>Servo Control Pin: P0.18</h3>
+     <p>Assigned for PWM control of servo motor</p>
+     <p>General GPIO</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>6. Creative Ingenuity</h3>
+     <h3>Waveshare MG90S Micro Servo</h3>
+     <p>I selected the waveshare MG90S Micro Servo, which has the wide operating voltage range(4.8V-6V) and high torque, for the scarf hand movement. 
+        This is because the scarf is powered by a mobile battery and smooth finger-like movement needs to be expressed. </p>
+     <div class="spacer-s"></div>
+     <h3>ESP32DevKitC-32C</h3>
+     <p>I used the development board for the scarf. This is because its functions are simpler and I focused on only the PCB design of the earrings for time and cost management.</p>
+
+
+  </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="../../common/js/header.js"></script>
+  <script src="../../common/js/footer.js"></script>
+</body>
+</html>

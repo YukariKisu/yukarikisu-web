@@ -219,6 +219,10 @@ main{
   }
 }
 
+.component-title {
+  white-space: nowrap;
+}
+
 
 /* ========== Smartphone styles ========== */
 @media (max-width: 768px) {
@@ -271,6 +275,10 @@ main{
   .about-content {
     padding: 0 1rem;
     text-align: left;
+  }
+
+  .component-title {
+    white-space: normal;
   }
 
 }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <!-- common CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../common/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- common header -->
+  <div id="header"></div>
+
+  <!-- Main contents -->
+  <main class="text-container">
+    <section class="content about-content">
+    <div class="expression-img">
+    <img src="../img/PowerManagement.svg" alt="Power Management">
+    </div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+  <!-- Power Supply Overview -->
+     <h2>Power Supply Overview</h2>
+     <div class="spacer"></div>
+
+     <h3>1. The Anemometer</h3>
+     <h3>1.1 Power Supply</h3>
+     <p>The anemometer is powered from the wall outlet via the AC/DC adapter</p>
+     <div class="spacer"></div>
+
+     <h3>1.2 Anemometer Specifications</h3>
+     <p>- Input Voltage: 7V - 24V</p>
+     <p>- Output Voltage : 0.4V - 2.0V</p>
+     <div class="spacer"></div>
+
+     <h3>1.3 AC/DC adapter Specifications</h3> 
+     <p>- Output Voltage: 12 V</p>
+     <p>- Output Current: 1000mA</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>2. The Anemometer’s ESP32</h3>
+     <h3>2.1 Power Supply</h3>
+     <p>The ESP32 is powered via the USB cable to the PC.</p>
+     <div class="spacer"></div>
+
+     <h3>2.2 Microcontroller Specifications</h3>
+     <p>- Model: ESP32 DevKitC-32UE</p>
+     <p>- Input Voltage: 5V</p>
+     <p>- Input Current: 1 - 2 A</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>3. The Scarf’s ESP32</h3>
+     <h3>3.1 Power Supply</h3>
+     <p>The ESP32 is powered by a mobile battery.</p>
+     <div class="spacer"></div>     
+
+     <h3>3.2 Microcontroller Specifications</h3>
+     <p>- Model: ESP32 DevKitC-32UE</p>
+     <p>- Input Voltage: 5V</p>
+     <p>- Input Current: 1 - 2 A</p>
+     <div class="spacer"></div>
+      
+     <h3>3.3 Mobile battery Specifications</h3>
+     <p>- MicroUSB Output : DC 5V/ 2A</p>
+     <p>- Capacity 5000mAh</p>      
+     <p>- Battery Type : Li-Pol</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+       
+
+     <h3>4. The Servo motor</h3>
+     <h3>4.1 Power Supply</h3>
+     <p>The servo motor is powered by the ESP32 via 5V pin.</p>
+     <div class="spacer"></div>
+      
+     <h3>4.2 Microcontroller Specifications</h3>
+     <p>- Model: ESP32 DevKitC-32UE</p>
+     <p>- Input Voltage: 5V</p>
+     <p>- Input Current: 1 - 2 A</p>     
+     <div class="spacer"></div>
+      
+     <h3>4.3 Servo motor Specifications</h3>
+     <p>- Model: Waveshare MG90S Micro Servo</p>
+     <p>- Input Voltage: 4.8V</p>
+     <p>- Torque : 2.0kg/cm</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>5.  The nRF52832</h3>
+     <h3>5.1 Power Supply</h3>
+     <p>The nRF52832 is powered by a rechargeable battery or a USB.</p>
+     <p>AP7333 converts the input voltage from either a USB or a Li-pol battery to a stable 3.3V.</p>  
+     <div class="spacer"></div>
+   
+     <h3>5.2 Microcontroller Specifications</h3>
+     <p>- Model: nRF52832-QFAA-R</p>
+     <p>- Input Voltage: 3.3V</p>
+     <p>- Input Current: up to 5mA</p>
+     <div class="spacer"></div>
+         
+     <h3>5.3 Rechargeable Battery Specifications</h3>
+     <p>- Output Voltage: 3.7V</p>
+     <p>- Capacity: 40mAh</p>
+     <p>- Charging Voltage: 3.7- 4.2V</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+  <!-- Voltage Regulation -->  
+     <h2>Voltage Regulation</h2>
+     <p>The earring’s PSB is powered from either a USB or a Li-pol battery. 
+        And the input voltage needs to be converted to a stable 3.3V, which is suitable for the main circuit. In this case, the linear regulator IC (AP7333) is used for the PCB.</p>
+     <div class="spacer"></div>
+
+     <h3>1. Voltage Regulation Circuit</h3>
+     <p>Li-Pol Battery -> AP7333 -> Main circuit </p>
+     <div class="spacer"></div>
+     
+     <h3>2. Main Component</h3>
+     <p>Rechargeable Battery: Li-Pol Battery</p>
+     <p>Linear Regulator IC: AP7333-33SAG-7</p>
+     <div class="spacer"></div>
+
+     <h3>3.  Current Overflow</h3>
+     <div class="expression-img">
+     <img src="img/Hard-mainpower-current.jpg" alt="Current Overflow">
+     </div>
+     <h3>[ VIN ]</h3>
+     <p>(powered by the USB)  approximately 5V</p>
+     <p>(powered by the battery) approximately 3.7V</p>  
+     <div class="spacer"></div>
+
+     <h3>4. Selected AP7333 as a linear regulator IC</h3>
+     <p> The reason I selected this regulator IC is that it supports a wide range input voltage of 2.5V to 5.5V. This was important because the PCB is powered by both USB and  battery.
+        Another reason is that this IC is compact and light. I chose it while considering the PCB’s space and weight limitations.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+
+  <!-- Battery Charging & Protection -->
+     <h2>Battery Charging & Protection</h2>
+     <div class="spacer"></div>
+
+     <h3>1. Battery Charging Circuit</h3> 
+     <p>USB input - Charging IC (BQ24040) - Li-Pol Battery</p>
+     <div class="spacer"></div>
+
+     <h3>2. Main Component</h3>
+     <p>Micro USB connector: 10118193-0001LF</p>
+     <p>Charging IC: BQ24040DSQR</p>
+     <p>Rechargeable battery: Li-Pol Battery</p>
+     <div class="spacer"></div>
+
+     <h3>3. Current Overflow</h3>  
+     <div class="expression-img">
+     <img src="img/Hard-charging-current.jpg" alt="Current Overflow">
+     </div>
+     <div class="spacer"></div>     
+
+     <h3>4. Heat Protection</h3>
+     <p>In this case, it could be considered that the charging circuit doesn’t have a significant heat production risks. This is because the charging speed is low(100mA), and the battery will supply power short time. 
+        In addition, the PCB space limitation needed to be considered. Therefore, the temperature sense circuit was omitted. However, the BTH pad was installed for the future extension.</p>
+     <div class="spacer"></div>
+
+     <h3>5. Changing the charging IC from TP4056 to BQ204040</h3>
+     <p>BQ204040 is lighter and smaller than TP4056. I chose BQ204040 instead, considering the PCB’s space and weight limitations. In addition, it allows access to the nCHG pin for implementing BLE in the future.</p>
+     <div class="spacer"></div>     
+
+     <h3>6. Omission of components</h3>
+     <p>Considering the PCB space and weight limitations, I decided to omit components and circuits that don’t affect the core functionalities keeping the essential functionalities. However I added a pad and a pin for the future extensions.</p>
+
+
+  </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="../../common/js/header.js"></script>
+  <script src="../../common/js/footer.js"></script>
+</body>
+</html>

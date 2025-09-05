@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <!-- common CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../common/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- common header -->
+  <div id="header"></div>
+
+  <!-- Main contents -->
+  <main class="text-container">
+    <section class="content about-content">
+      <div class="expression-img">
+      <img src="../img/Challenges&Learnings.svg" alt="Challenges & Learnings">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <h2>Handwritten Makefile</h2>
+      <div class="spacer"></div>
+
+      <h3>1. Challenging Point</h3>
+      <p>Unlike source files, it is difficult to understand the dependencies between files and the overall build process in a Makefile. 
+        When build errors occur, it takes a lot of time to fix them because the error messages are often unclear or indirect. 
+        What made it more complicated was that I had to revise not only the Makefile itself, but also other things like automatically generated files or the linker script.</p>
+      <div class="spacer"></div>
+
+      <h3>2. Solution</h3>
+      <p>First, I focused on understanding basic structure of Makefile, build rules and build process. 
+        In addition, I made the main function minimal so that a Makefile would be simpler. I searched and fixed the build errors using AI tools.</p>      
+      <div class="spacer"></div>
+
+      <h3>3. Learning & Reflection</h3>
+      <p>This was my first time to write a Makefile. It took over a week to make the LED blink and fix the Makefile. 
+        However, It was valuable opportunity for me to understand the basic structure of a Makefile, the build process, the relationship to the Linger script and config files. 
+        In addition, I worked on register programming to add the UART function. Next time, I’d like to try using the SDK and other functions like PWM, Interrupt and so on.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+      <h2>Implementation of BLE</h2>
+      <div class="spacer"></div>
+
+      <h3>1. Challenging Point</h3>
+      <p>As I mentioned earlier, I implemented the nRF52832 using a handwritten Makefile and revising the Makefile was so complicated and time-consuming. 
+        Therefore, I decided to use wired communication instead of BLE to manage time and ensure implementation stability. At first, I tried to implement BLE on the ESP32: using the anemometer’s ESP32 as a peripheral and the scarf’s ESP32 as a central. 
+        Eventually, the peripheral’s advertising and detection via a smartphone application succeeded, while the central couldn’t detect the peripheral’s UUID. 
+        I decided to make BLE the next challenge for time management. What was difficult about the BLE implementation was that deciding which nodes - peripheral or central - was causing the problem, and the fact that debugging is only possible through a smartphone application using wireless communication. 
+         Especially, I felt that there were a lot of differences between communicating with a smartphone and a microcontroller and one with multiple microcontrollers. I was confused about how to interpret the result of the smartphone application. 
+         By that I mean that I could decide whether detecting an advertising signal through the smartphone application meant the peripheral was adverting successfully. I felt that the limitation of debugging made BLE implementation so complicated, making it difficult to determine the cause.</p>
+      <div class="spacer"></div>
+
+
+      <h3>2. Solution</h3>
+      <p>One of things I devised in the BLE implementation is to use logs, like initialization, UUID settings. With these logs, I could verify the current implementation. 
+         Adding logs helped me decide what was causing the malfunctions because I could compare the current conditions on both sides - the peripheral and the central.  
+         In addition, as I mentioned earlier, I paid attention to judging the detection from the smartphone application using wireless communication between multiple microcontrollers. 
+         Especially, what should be noted is that even if the peripheral’s advertising is detected by the smartphone application, it can’t be detected by the central. 
+         I didn’t find the reason and solution, and I’d like to make it my next challenge.</p>
+      <div class="spacer"></div>
+      
+      <h3>3. Learning & Reflection</h3>
+      <p>Through this implementation, I learned how difficult and unstable of the BLE implementation can be. It took a lot of time to identify what the invisible errors were and where they were, when I could debug using logs and the smartphone application without any build errors. 
+        In addition, I felt that it is difficult to make the BLE implementation reproducible because I experienced that  even if the central could detect the advertising once, it couldn’t detect it again the next day. 
+        As my next step, I’d like to implement the BLE using the SDK on the nRF52832, and I will develop stable wireless communication between a smartphone and a microcontroller. Then I will upgrade this communication to work between multiple microcontrollers. </p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+      <h2>The Earring’s Size & Weight</h2>
+      <div class="spacer"></div>
+      <h3>1. Challenging Point</h3>
+      <p>I needed to design the earring with a diameter within 30mm and a weight within 5g for both design and safety reasons. In particular, I paid attention to keeping its weight within 5g to avoid injuries. 
+        In addition, I used a rechargeable battery for convenience and reusability, therefore, the PCB needed to include a USB socket and charging circuit in addition to a battery. </p>
+      <p>Servo control, LED blinking</p>
+      <div class="spacer"></div>
+
+      <h3>2. Solution</h3>
+      <p>As I mentioned earlier, to meet the size limitations - a weight within 5g and a diameter within 30mm - I selected smaller and lighter components for the PCB. Furthermore, I placed the minimum required components on it. I also chose a smaller and lighter battery and designed the case with a thickness of 1mm.</p>
+      <div class="spacer"></div>
+
+      <h3>3. Learning & Reflection</h3>
+      <p>In this case, I designed the PCB for the earrings from scratch, even though the other components - the anemometer and the scarf - used the ESP32DevKit-32UE. I needed to pay attention when selecting and placing components on the PCB, which is small and circular in shape. 
+        It took a lot of time to decide the way to connect the TXD from the scarf’s ESP32 to the RXD of the earrings. This is because both the earrings and the scarf are wearable components and it is difficult to keep them constantly connected. As a result of my research, I decided that using SH socket would be the best way to connect these components. 
+        Then I placed a sub PCB on the bottom of the case and implemented communication using an SH socket and cable. This was my first time hand soldering. In addition, it required precise handling because of the small PCB. Therefore, I was supported hand soldering by my university professor, Petr Olivka. Then I could implement it successfully. </p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+     <h2>Time Management</h2>
+     <div class="spacer"></div>
+
+     <h3>1. Challenging Point</h3>
+     <p>It was difficult to estimate how long the implementation would take. This was because it was my first time implementing with microcontrollers, and the program uses two types of microcontrollers and three components. 
+        In addition, there were some situations when I couldn’t help but postpone the implementation due to defectives or delay of components like the PCB, microcontrollers and screws and so on, and I needed to deal with the situation flexibly. </p>
+    <div class="spacer"></div>
+
+    <h3>2. Solution</h3>
+    <p>From the beginning, the implementation period was set to three months. And I needed to search for and collect information efficiently in order to complete to select all of components, implement the program, record daily implementation and write the technical documentation within this period. 
+        Therefore, I made the most of AI to search and collect some information, then I could use my time more efficiently. In addition, I processed the BLE implementation after I completed wire communication. As a result, I could estimate the implementation time realistically.</p>
+    <div class="spacer"></div>      
+    
+    <h3>3. Learning & Reflection</h3>
+    <p>These three months can be divided into three phases:</p>
+    <p>In the first month, I completed setting up the development environment, like the Makefile and the BLE and all basic functions using wire communication. In the second month, I set some parameters in detail, like the range of the finger movement and the threshold of wind data and designed the PCB and the case at the same time. 
+        In addition, I completed to create the finger structure and the scarf outline. In the third month, I ordered the PCB and its case, and implemented hand soldering and wrote the technical documents and so on.</p>
+    <p>In each phase, even though I was under constant mental pressure, I managed to completed this project within this period. I recognized that time management for each  phase and use of AI were essential to completing the implementation even though it used wire communication.</p>
+    <div class="spacer"></div>
+    <div class="spacer"></div>    
+
+    <h2>Project Documentation</h2>
+    <div class="spacer"></div> 
+    <h3>1. Challenging Point</h3>
+    <p>I shared the implementation every day as daily record on my account. It took a lot of time to confirm and search several things related to the program, such as the reasons for my decision, the meanings of the code, how the functions work. 
+       This was because I couldn’t completely understand them many times, even though I had felt I did. What I found difficult in writing this technical document was deciding whether the information was necessary or not. In short, too much detail makes the central point unclear. On the other hand, too little information doesn’t work as a document. 
+       In addition, I struggled to decide what to write unless I clarified the meaning of each chapter and the contents which I wanted to share. Through this situation, the process of establishing a document structure and content that would be clear to others felt like organizing maps and information boards in an unfamiliar city.</p>
+    <div class="spacer"></div> 
+
+    <h3>2. Solution</h3>
+    <p>I used many diagrams and pictures in the document, and avoided redundant content to get an overview. I divided the document into chapters with the same structure for each component, so that they could be easily compared. In addition, to be clear my thought, I spent time every day reviewing what I had thought and tried in my daily work.</p>
+    <div class="spacer"></div> 
+
+    <h3>3. Learning & Reflection</h3>
+    <p>It was harder to translate my idea into something that can inform others, such as giving shape to my idea and transforming my thoughts into writing, than I expected.  An idea is invisible and doesn’t have shape unless it is transformed into writing. When it is converted to be visible, it becomes tangible from abstract. 
+        I learned these things through my experience. In addition, I realized many times that I couldn’t fully understand what I thought I understood completely while I constructed the documents to be clear for others.  These realizations were the most important thing through writing documents.</p>
+
+
+  </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="../../common/js/header.js"></script>
+  <script src="../../common/js/footer.js"></script>
+</body>
+</html>

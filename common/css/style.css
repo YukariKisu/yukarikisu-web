@@ -41,6 +41,14 @@ body {
   height:2rem;
 }
 
+.spacer-s{
+  height:1rem;
+}
+
+.spacer-xs{
+  height:0.5rem;
+}
+
 .credit {
   position: static; 
   font-size: 0.7em;

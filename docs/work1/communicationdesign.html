@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <!-- common CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../common/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- common header -->
+  <div id="header"></div>
+
+  <!-- Main contents -->
+  <main class="text-container">
+    <section class="content about-content">
+      <div class="expression-img">
+      <img src="../img/CommunicationDesign.svg" alt="Communication Design">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+  <!-- 1. Communicaton Flow & Overview -->
+      <h2>1. Communicaton Flow & Overview</h2>
+      <div class="spacer"></div>
+      <h3>1.1 Data Communication Flow & Flow Overview</h3>
+      <div class="expression-img">
+      <img src="img/Com-Overview.jpg" alt="Data Communication Flow Overview">
+      </div>
+      <div class="spacer"></div>
+      <h3>1.2 Node Overview & Rules</h3>
+      <div class="expression-img">
+      <img src="img/Com-NodeOverview&Rules.jpg" alt="Node Overview & Rules">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+  <!-- 2. Communication Flow & Protocol -->
+      <h2>2. Communication Flow & Protocol</h2>
+      <div class="spacer"></div>
+      <h3>2.1 Anemometer Node ——> Anemometer’s ESP32 Node</h3>
+      <div class="expression-img">
+        <img src="img/Com-Flow&Pro Anemo-ESP.jpg" alt="Anemometer Node - Anemo's ESP32 Node">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.2 Anemometer’s ESP32 Node ——> Scarf’s ESP32 Node</h3>
+      <div class="expression-img">
+      <img src="img/Com-Flow&Pro EPS-ESP.jpg" alt="Anemometer's ESP32 - Scarf's ESP32">
+      </div>
+      <div class="spacer"></div>
+      <p>Duty value: The ratio of the high time in a PWM signal.</p>
+      <p>Used to control the servo angle.</p>
+      <p>Calculation (example):</p>
+      <p>pulse_width = 500µs + (angle / 180) × 2000µs</p>
+      <p>duty_value = (pulse_width / 20,000µs) × 65535</p> 
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.3 Scarf’s ESP32 Node ——> Scarf Servo Node</h3>
+      <div class="expression-img">
+      <img src="img/Com-Flow&Pro ESP-Servo.jpg" alt="Scarf's ESP32 - Scarf Servo">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.4Scarf’s ESP32 Node ——> Earring’s nRF52832 Node</h3>
+      <div class="expression-img">
+      <img src="img/Com-Flow&Pro ESP-Earring.jpg" alt="Scarf's ESP32 - Earring's nRF52832">
+      </div>      
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2.5 Earring’s nRF52832 Node ——> Earring LED Node</h3>
+      <div class="expression-img">
+      <img src="img/Com-Flow&Pro nRF-LED.jpg" alt="Earring's nRF52832 - LED">
+      </div> 
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+  <!-- 3. Timing & Triggers -->
+     <h2>3. Timing & Triggers</h2>
+     <div class="spacer"></div>   
+       
+     <h3>3.1 Anemometer Node ——> Anemometer’s ESP32 Node</h3>
+
+     <h3>3.1.1 Trigger</h3>
+     <h3>Periodic task using FreeRTOS</h3>
+     <p>The adc_send_task() function, which processes and sends wind data, is executed periodically as a FreeRTOS task.</p>
+     <div class="spacer"></div>
+
+     <h3>3.1.2 Timing</h3>
+     <h3>Receive analog data and send digital data every second</h3>
+     <p>The adc_send_task() function is triggered every second. At each execution, the ESP32 samples the analog signal and converts it into digital data.</p>
+     <div class="spacer"></div>
+     <h3>3.1.3  Processing</h3>
+     <p>- The ADC in the ESP32 converts the analog signal into 12-bit digital data.</p>
+     <p>- The 12-bit digital value is split into two 8-bit values.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>3.2 Anemometer’ ESP32 Node ——> Scarf’s ESP32 Node</h3>
+
+     <h3>3.2.1 Trigger</h3>
+     <h3>Periodic task using FreeRTOS</h3>
+     <p>The adc_send_task() function, which processes and sends wind data, is executed periodically as a FreeRTOS task.</p>
+     <div class="spacer"></div>
+
+     <h3>3.2.2 Timing</h3>
+     <h3>Receive analog data and send digital data every second</h3>
+     <p>The adc_send_task() function is triggered every second. At each execution, the anemometer’s ESP32 sends the two 8-bit data to the scarf’s ESP32.</p>
+     <div class="spacer"></div>
+
+     <h3>3.2.3  Processing</h3>
+     <p>- The two 8-bit values are sent to the scarf’s ESP32 via UART.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+
+     <h3>3.3 Scarf’s ESP32 Node ——> Scarf Servo Node</h3>
+
+     <h3>3.3.1 Trigger</h3>
+     <h3>Periodic task using FreeRTOS</h3>
+     <p>The uart_send_task() function, which controls the servo motor, is executed periodically as a FreeRTOS task.</p>
+     <div class="spacer"></div>
+
+     <h3>3.3.2 Timing</h3>
+     <h3>Control the servo motor every 20ms</h3>
+     <p>The uart_send_task() function is triggered every 20ms. At each execution, the ESP32 moves the servo back and forth  between 90 and 150, coverting a total range of 60 degrees.</p>
+     <div class="spacer"></div>   
+     
+     <h3>3.3.3  Processing</h3>
+     <p>- The uart_send_task() function reconstructs the two 8-bit values to a 16-bit value.</p>
+     <p>- The PWM signal is interpreted, and the servo motor rotates to the corresponding angle.</p>
+     <div class="spacer"></div> 
+     <div class="spacer"></div> 
+
+     <h3>3.4 Scarf’s ESP32 Node ——  Earring’s nRF52832 Node</h3>
+
+     <h3>3.4.1 Trigger</h3>
+     <h3>Periodic task using FreeRTOS</h3> 
+     <p>The uart_send_task() function, which sends the value of 1 or 0, is executed periodically as a FreeRTOS task.</p>
+     <div class="spacer"></div>
+
+     <h3>3.4.2 Timing</h3>
+     <h3>Send the value of 1 or 0 every 20ms</h3>
+     <p>The uart_send_task() function is triggered every 20ms. At each execution, it sends the value 1 or 0 to the earring’s nRF52832.</p>
+     <div class="spacer"></div>
+
+     <h3>3.4.3  Processing</h3>
+     <p>- The  function reconstructs the two 8-bit values to a 16-bit value.</p>
+     <p>- It sends the value of 1, when the wind digital data is over 450. </p>
+     <p>- It sends the value of 0, when the wind digital data is below 450.</p>
+     <div class="spacer"></div>
+     <div class="spacer"></div>
+
+     <h3>3.5  Earring’s nRF52832 ——  Earring LED Node</h3>
+
+     <h3>3.5.1 Trigger</h3>
+     <h3>Periodic task using FreeRTOS</h3> 
+     <p>The simple_uart_get() function always monitors whether the value of 1 or 0 is sent from the uart_send_task() function in the scarf’s ESP32. The uart_send_task() is executed periodically as a FreeRTOS task.</p>
+     <div class="spacer"></div>
+
+     <h3>3.5.2 Timing</h3>
+     <h3>Receive the value of 1 or 0 every 20ms</h3>
+     <p>The uart_send_task() function is triggered every 20ms. At each execution, it sends the value 1 or 0 to the earring’s nRF52832. Then, the nRF52832 sets the GPIO pin to high or low accordingly.</p>
+     <div class="spacer"></div>    
+
+     <h3>3.5.3  Processing</h3>
+     <p>- The simple_uart_get() function always monitors whether the value of 1 or 0 is sent from the scarf’s ESP32.</p>
+     <p>- The GPIO pin is set to high, when the nRF52832 receives the value of 1.</p>
+     <p>- The GPIO pin is set to low, when the device receives the value of 0.</p>  
+
+
+  </section>
+  </main>
+
+
+
+  <div id="footer"></div>
+  <script src="../../common/js/header.js"></script>
+  <script src="../../common/js/footer.js"></script>
+</body>
+</html>

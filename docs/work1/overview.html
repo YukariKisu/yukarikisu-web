@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <!-- common CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../common/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- common header -->
+  <div id="header"></div>
+
+  <!-- Main contents -->
+  <main class="text-container">
+    <section class="content about-content">
+      <div class="expression-img">
+      <img src="../img/ProjectOverview.svg" alt="Project Overview">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <h2>Purpose</h2>
+      <p>Wind is the invisible, but it clearly touches our bodies. To enable us to feel the invisible, this project uses light and motion as alternative expressions.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h2>Concept</h2>
+      <p>“Giving shape to the invisible” — transforming the unseen into something we can feel, through technology and the sensibility of Japanese culture.</p>      
+      <p>More about the concept: <a href="../../en/concept.html">yukarikisu.com/concept</a></p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h2>Components</h2>
+      <h3>The Anemometer (ESP32DevKitC)</h3>
+      <p>Detects wind and sends the data to the scarf.</p>
+      <div class="spacer"></div>
+      <h3><div class="component-title">The Scarf   (ESP32DevKitC)</div></h3>
+      <p>Receives wind data from the anemometer,  sends it to the earring, and controls a servo motor.</p>
+      <div class="spacer"></div>
+      <h3><div class="component-title">The Earrings(nRF52832)</div></h3>
+      <p>Receive wind data from the scarf and controls LED blinking.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h2>Status</h2>
+      <h3>Completed: </h3>
+      <p>Data communication using cables</p>
+      <p>Wind detection</p>
+      <p>Servo control, LED blinking</p>
+      <div class="spacer"></div>
+      <h3>Next Challenge:</h3>
+      <p>Wireless data communication using BLE</p>
+
+
+  </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="../../common/js/header.js"></script>
+  <script src="../../common/js/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <!-- common CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../common/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- common header -->
+  <div id="header"></div>
+
+  <!-- Main contents -->
+  <main class="text-container">
+    <section class="content about-content">
+      <div class="expression-img">
+      <img src="../img/TechnicalDesign.svg" alt="Technical Design">
+      </div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+  <!-- Overview  -->
+      <h2>Overview</h2>
+      <h3>Anemometer Unit</h3>
+      <p>1. Reads wind speed via analog input(ADC)</p>
+      <p>2. Sends wind data via UART to the scarf unit.</p>
+      <div class="spacer"></div>
+
+      <h3>Scarf Unit</h3>
+      <p>1. Receives wind data via UART from the anemometer unit.</p>      
+      <p>2. Sends wind data via UART to the earring unit.</p>
+      <p>3. Controls Servo to reflect wind</p>
+      <div class="spacer"></div>
+
+      <h3>Earring Unit</h3>
+      <p>1. Receives wind data via UART from the earring unit.</p>
+      <p>2. Processes input data to control LED behavior</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      
+  <!-- Anemometer Unit -->
+      <h2>Anemometer Unit</h2>
+      <h3>1. Main Function</h3>
+      <p>Detects wind via analog signal from the anemometer</p>
+      <p>Sends data to the scarf’s ESP32 via UART</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2. Data Flow</h3>
+      <h4>1. (Anemometer) Detects wind speed</h4>
+      <p>The anemometer detects wind speed and sends its analog signal to the ESP32 via ADC1_CHANNEL_6 (GPIO34).</p>
+      <div class="spacer"></div>
+      <h4>2. (ESP32) Input analog signal from an anemometer</h4>
+      <p>The ESP32 receives wind analog signal from the anemometer via ADC1_CHANNEL_6.</p>
+      <div class="spacer"></div>
+      <h4>3. (ESP32) Convert A/D</h4>
+      <p>Wind analog signal from the anemometer is converted into 12 bit digital data in the analog digital converter in the ESP32.</p>
+      <div class="spacer"></div>
+      <h4>4. (ESP32) Split Data</h4>
+      <p>The 12-bit digital data is split into two 8-bit values: the high byte and the low byte in the adc_send_task() function. This is because UART sends one byte at a time.</p>
+      <div class="spacer"></div>
+      <h4>5. (ESP32) Send Data</h4>
+      <p>The 12 bit digital data, which is split into high and low, is sent to the scarf’s ESP32 via UART using comm_send() function.</p>
+      <div class="spacer"></div>  
+      <h4>6. (ESP32) FreeRTOS task</h4>
+      <p>2 bytes digital data (High and Low) are sent to the scarf’s ESP32 every second via UART using FreeRTOS task.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>3. Key Settings</h3>
+      <h4>3.1 Converts Analog Signal to Digital Signal</h4>
+      <h4>3.1.1 GPIO Assignment</h4>
+      <p>ADC1_CHANNEL_6 is assigned to GPIO34.</p>
+      <div class="spacer"></div>
+
+      <h4>3.1.2 ADC Resolution</h4>
+      <p>The ADC resolution is configured as ADC_WIDTH_BIT_12, which means that the analog signal is converted into a 12-bit digital value.</p>
+      <div class="spacer"></div>
+
+      <h4>3.1.3 ADC Attenuation</h4>
+      <p>The ADC attenuation is set to ADC_ATTEN_DB_11, which means it can convert analog signals up to approximately 3.3V without clipping.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h4>3.2 Sends Data</h4>
+      <h4>3.2.1 UART initialization</h4>
+      <p>UART is initialized using uart_driver_install() function, which sets UART2 driver and UART buffer as general value.</p>
+      <div class="spacer"></div>
+
+      <h4>3.2.2 UART Pin setting (GPIO assignment)</h4>
+      <p>GPIO21 is assigned as TXD using uart_set_pin() function.</p>
+      <div class="spacer"></div>
+
+      <h4>3.2.3 Basic Parameters of UART communication</h4>
+      <p>Basic Parameters of UART are configured using uart_param_config() function. In this case, all parameters are set to standard value.</p>
+      <div class="spacer"></div>
+
+      <h4>3.2.4 Sends digital data</h4>
+      <p>Every second, 2-byte(high and low) is sent using adc_task(), comm_send() and xTaskCreate() functions.</p>
+      <p>1. In adc_task(), the 12-bit ADC data is split into the high byte and the low byte. And then these data are sent using comm_send() function, which sends one byte at a time.</p>
+      <p>2. adc_task() is executed every second as a FreeRTOS. As a result, wind data are sent continuously.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>4. Implementation Highlights</h3>
+      <h4>1. FreeRTOS</h4>
+      <p>Wind data is sent on a regular basis to implement sending data when the anemometer detects wind because UART is asynchronous data communication. Therefore, FreeRTOS is used for the function which sends data every second without heavily loading the CPU.</p>
+      <div class="spacer"></div>
+
+      <h4>2. Attenuation</h4>
+      <p>The attenuation is set to ADC_ATTEN_DB_11 to avoid ADC overflow when the input voltage is close to 3.3V.</p>
+      <div class="spacer"></div>
+      <h4>3. Resolution</h4>
+      <p>ADC_WIDTH_BIT_12 is the highest resolution available in ESP-IDF, which can convert analog signal more precisely.</p>
+      <div class="spacer"></div>
+      <h4>4. comm.c/ comm.h</h4>
+      <p>The codebase is divided into two parts: data communication and other functions. This is because it makes the codebase more comprehensible, and prepares for the future BLE extension.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+  <!-- Scarf Unit -->
+      <h2>Scarf Unit</h2>
+      <h3>1. Main function</h3>
+      <p>Receives data from the anemometer’s ESP32 via UART</p>
+      <p>Sends data to the earring’s nRF52832 via UART</p>
+      <p>Controls servo motor to reflect wind</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2. Data Flow</h3>
+      <h4>1. Receive data from the anemometer’s ESP32</h4>
+      <p>The scarf’s ESP32 receives two 8-bit data: the high byte and the low byte - from the anemometer’s ESP32 via UART.</p>
+      <div class="spacer"></div>
+      <h4>2. Reconstruct a 16-bit value from two 8-bit data</h4>
+      <p>The uart_send_task() function reconstructs a 16-bit value from two 8-bit data: the high byte and the low byte.</p>
+      <div class="spacer"></div>
+      <h4>3-A. Send data to the earring’s nRF52832</h4>
+      <p>The uart_send_task() function sends 1 as sendByte to the earring’s nRF52832 when the wind data value is over 450, and 0 when it is below 450.</p>
+      <div class="spacer"></div>
+      <h4>3-B. Control servo motor</h4>
+      <p>The uart_send_task() function controls the servo motor, when the wind data value is over 450.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+
+      <h3>3 Key Settings</h3>
+      <h4>3.1. Receive Data</h4>
+      <h4>3.1.1 UART initialization</h4>
+      <p>UART is initialized using uart_driver_install() function, which sets UART2 driver and UART buffer as general value.</p>
+      <div class="spacer"></div>
+      <h4>1.2 UART Pin setting (GPIO assignment)</h4>
+      <p>GPIO22 is assigned as RXD using uart_set_pin() function.</p>
+      <div class="spacer"></div>
+      <h4>3.1.3 Basic Parameters of UART communication</h4>
+      <p>Basic Parameters of UART are configured using uart_param_config() function. In this case, all parameters are set to standard value.</p>
+      <div class="spacer"></div>
+      <h4>3.1.4 Receive digital data</h4>
+      <p>Every second, 2-byte(high and low) are received from the anemometer’s ESP32 via UART2.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h4>3.2. Send Data</h4>
+      <h4>3.2.1 UART initialization</h4>
+      <p>UART is initialized using uart_driver_install() function, which sets UART1 driver and UART buffer as general value.</p>
+      <div class="spacer"></div>
+      <h4>3.2.2 UART Pin setting (GPIO assignment)</h4>
+      <p>GPIO17 is assigned as TXD using uart_set_pin() function.</p>
+      <div class="spacer"></div>
+      <h4>3.2.3 Basic Parameters of UART communication</h4>
+      <p>Basic Parameters of UART are configured using uart_param_config() function. In this case, all parameters are set to standard value.</p>
+      <div class="spacer"></div>
+      <h4>3.2.4 Send digital data</h4>
+      <p>The sendByte as 1 is sent to the earrings nRF52832 via UART1 when the restructured 16-bit data is over 450. If the value is below 450, 0 is sent instead.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h4>3.3 Servo Control</h4>
+      <h4>3.3.1  Basic parameters of LEDC Timer</h4>
+      <p>The basic parameters of LEDC timer are defined in servo_init() function and configured using ledc_timer_config() function. 
+        The duty resolution is set to 16-bit, which is the highest available. And the PWM frequency is set to 50Hz. Other parameters are standard values for servo control.</p>
+      <div class="spacer"></div>
+      <h4>3.3.2  Basic parameters of LEDC Channel</h4>
+      <p>The basic parameters of LEDC channel are defined in servo_init() function and configured using ledc_channel_config() function. 
+        GPIO18 is assigned as servo GPIO pin, and LEDC channel 1 is used. Other parameters are standard values for servo control.</p>
+      <div class="spacer"></div>
+      <h4>3.3.3  React to wind</h4>
+      <p>The uart_send_task() function controls the servo angle 1-degree every 20 ms. The servo moves back and forth between 90 to 150 degrees when wind data is over 450.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>  
+      
+      
+      <h3>4 Implementation Highlights</h3>
+      <h4>1. Reconstruct Data Bits From two 8-bit value to one 16-bit value</h4>
+      <p>Initially, the wind data is 12-bit, as processed by the ADC. However, it needs to be split into two 8-bit parts to be sent via UART. 
+        This is because UART can send one byte at a time. These two bytes need to be reconstructed to one 16-bit value in order to retrieve the 12-bit data precisely in the scarf unit.</p>
+      <div class="spacer"></div>
+      <h4>2. FreeRTOS</h4>
+      <p>To express the finger movement that gently embraces the shoulder the servo motor needs to be controlled slowly and smoothly between appropriate flex degree. 
+        The result of the verification is that when the servo moves back and forth between 90 and 150(a total range of 60 degrees), the scarf hand fits the shoulder and provides tactile feedback. 
+        In addition, the servo is set to move 1-degree at 20 ms using FreeRTOS in order to express the smooth finger movement.</p>
+      <div class="spacer"></div>  
+      <h4>3. Send Data</h4>  
+      <p>The if statement includes the servo control task and sending byte 1 to the earring, while the else statement sends byte 0 only. This is to express the behavior that the scarf hand and LED react at the same time when wind is detected.</p>  
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+    <!-- Scarf Unit -->    
+      <h2>Earring Unit</h2>
+      <h3>1. Main Function</h3>
+      <p>Receives UART data from the scarf’s ESP32</p>
+      <p>Processes input data to control LED behavior</p>
+      <p>Controls GPIO</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>2. Data Flow</h3>
+      <h4>1. Receive data from the scarf’s ESP32</h4>
+      <p>1.1 The simple_uart_get() function always monitors  whether NRF_UART0->EVENTS_RXDRDY is set to 1.</p>
+      <p>1.2 When the simple_uart_get() function receives 1, this value is inserted into NRF_UART0->RXD.</p>
+      <p>1.3 NRF_UART0->RXD is returned as the result.</p>
+      <p>1.4 The return value is assigned to uint8_t c in the main() function.</p>
+      <div class="spacer"></div>
+      <h4>2. Control the LED behavior</h4>
+      <p>When the simple_uart_get() function receives the value 1, the assigned GPIO pin is set to high by nrf_gpio_pin_set(). As a result, the LED turns on.</p>
+      <p>When the simple_uart_get() function receives the value 0, the assigned GPIO pin is set to low by nrf_gpio_pin_clear(). As a result, the LED turns off.</p>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>3. Key Settings</h3>
+      <h4>1. UART initialization and GPIO assignment</h4>
+      <p>In the simple_uart_init() function, the UART is initialized by assigning values to each register using NRF_UART0. This device only receives data, therefore GPIO8 is assigned as RXD, and TASKS_STARTRX is set to 1. 
+        The BAUDRATE is set to 115200, which is the same value as on the other devices. TXD is assigned a default value because this device does not send data. </p>
+      <div class="spacer"></div>
+      <h4>2. GPIO settings</h4>  
+      <p>The nrf_gpio_cfg_output() function sets the assigned GPIO24 as an output pin.</p>  
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <h3>4. Implementation Highlights</h3>
+      <h4>1. Register Programming</h4>
+      <p>The Makefile needed to be modified only minimally due to time limitations because the program was implemented using the handwritten Makefile instead of the SDK. Therefore, in this case, UART is initialized by writing to registers directly.</p>
+      <div class="spacer"></div>
+      <h4>2. Poling Method</h4>
+      <p>The program was implemented using poling method. This is because this logic is simple and does not require consideration the CPU loading. In addition, using the poling method helped this project stay within the schedule since the Makefile was modified only minimally.</p>
+
+
+  </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="../../common/js/header.js"></script>
+  <script src="../../common/js/footer.js"></script>
+</body>
+</html>
